@@ -1,6 +1,6 @@
 import { Children } from "react"
 
-export const Button= ({children}) => {
+export const Button= ({children, onClick}) => {
 
 
 

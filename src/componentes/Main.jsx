@@ -9,12 +9,25 @@ export const Main = () => {
     const[genders, setGenders] = useState([])
     const[selectedGender, setSelectedGender] = useState("")
     const [movies, setMovies] = useState ([])
-    const [filteredMovies, setFiltered]
+    const [filteredMovies, setFilteredMovies] = useState ([])
     const[loading, setLoading] = useState (false)
+    const config = {
+        headers:{
+            authorization: `Bearer ${import.meta.env.PUBLIC_API_TOKEN}`,
+            'content-type' : 'application/json'
+        }
+    }
     const getGenders = async ()=>{
         try{
-            const url =
-            const
+            const url = "https://api.themoviedb.org/3/genre/movie/list?language=es"
+            const req = await fetch(url, config)
+            const res = await req.json()
+
+            if (req.status === 200){
+                setGenders(res.genres)
+            }
+            }catch(err){
+                console.error(err)
             }
         }
     const addPage = () => {
@@ -23,7 +36,7 @@ export const Main = () => {
     const getMovies = async ()=>{
         try{   
             setLoading(true)
-            const url = ´https://api.themoviedb.org/3/movie/popular?language=es-ES&page=${page}´
+            const url = `https://api.themoviedb.org/3/movie/popular?language=es-ES&page=${page}`
             
             const req = await fetch(url, config)
             if (req.status === 200){
@@ -31,18 +44,13 @@ export const Main = () => {
                 setMovies([movies.concat(res.results)])
             }
         }
-        } catch(err){
+         catch(err){
             console.error(err)
         } finally{
             setLoading(false)
+        } 
         }
-        
-    ``
 
-    useEffect(() =>{
-        Pormise.all(getMovies(), getGenders())
-    
-    }, [page])
 
     const filterMovies= () => {
 
@@ -50,7 +58,7 @@ export const Main = () => {
             setFilteredMovies(movies)
         }else{
             const fm= movies.filter(movie=>{
-              if(movie.genre_ids.includes(selectedGender)){
+              if(movie.genre_ids.includes(Number(selectedGender))){
                 return movie
               }  
             })
@@ -79,7 +87,9 @@ export const Main = () => {
     <section className="main_cards">
 
         {
-            
+            filteredMovies.map((movie) => {
+                return <Card key={movie.id} movie={movie} />
+            })
         }
         
     </section>

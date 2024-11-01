@@ -3,7 +3,7 @@ export const Search = ({selectedGender, setSelectedGender, genders}) =>{
                     onChange={(e) => setSelectedGender(e.target.value)}>
         <option value="">Todos</option>
         {
-            genders.map(genders =>{
+            genders.map(gender =>{
                 return <option key={gender.id} value={gender.id}>
                     {gender.name}
                 </option>
