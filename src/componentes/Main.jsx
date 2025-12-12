@@ -2,15 +2,16 @@ import { useState, useEffect } from "react"
 import { Button } from "./ui/Button"
 import {Card} from './ui/Card'
 import { Search } from "./ui/Search"
+import {v4 as uuid} from "uuid"
 
 export const Main = () => {
 
     const [page, setPage] = useState(1)
-    const[genders, setGenders] = useState([])
-    const[selectedGender, setSelectedGender] = useState("")
+    const [genders, setGenders] = useState([])
+    const [selectedGender, setSelectedGender] = useState("")
     const [movies, setMovies] = useState ([])
     const [filteredMovies, setFilteredMovies] = useState ([])
-    const[loading, setLoading] = useState (false)
+    const [loading, setLoading] = useState (false)
     const config = {
         headers:{
             authorization: `Bearer ${import.meta.env.PUBLIC_API_TOKEN}`,
@@ -41,6 +42,7 @@ export const Main = () => {
             const req = await fetch(url, config)
             if (req.status === 200){
                 const res = await req.json()
+                console.log (res)
                 setMovies([movies.concat(res.results)])
             }
         }
@@ -58,12 +60,14 @@ export const Main = () => {
             setFilteredMovies(movies)
         }else{
             const fm= movies.filter(movie=>{
-              if(movie.genre_ids.includes(Number(selectedGender))){
+              if(movie?.genre_ids.includes(Number(selectedGender))){
                 return movie
               }  
             })
             setFilteredMovies(fm)
         }
+        console.log (filteredMovies)
+        console.log (movies)
     }
     useEffect(()=>{
         getGenders()
@@ -87,8 +91,8 @@ export const Main = () => {
     <section className="main_cards">
 
         {
-            filteredMovies.map((movie) => {
-                return <Card key={movie.id} movie={movie} />
+            movies.map((movie) => {
+                return <Card key={uuid()} movie={movie} />
             })
         }
         

@@ -1,4 +1,5 @@
-export const Search = ({selectedGender, setSelectedGender, genders}) =>{
+export const Search = ({selectedGender, setSelectedGender, genders}) => {
+    
       return (<select className='search'
                     onChange={(e) => setSelectedGender(e.target.value)}>
         <option value="">Todos</option>

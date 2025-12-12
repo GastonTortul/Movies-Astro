@@ -13,7 +13,7 @@ export const Card =({movie}) =>{
         setStars_list("⭐".repeat(stars))
     }, [stars])
 
-return <div className="card">
+return (<div className="card">
         <div className="card__image">
             <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="" />
         </div>
@@ -24,4 +24,5 @@ return <div className="card">
         <p>Votos: {vote_count} </p>
         </div>
     </div>
+    )
 }

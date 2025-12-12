@@ -1,4 +1,4 @@
-.main{
+.contendor{
     display: flex;
     flex-direction: column;
     gap: 5rem;
@@ -9,7 +9,7 @@
 .main__cards{
     display: grid;
     grid-template-columns: repeat(1,1fr);
-    gap: 2rem;
+    gap: 1rem;
     
 }   
 @media (min-width:768px){
