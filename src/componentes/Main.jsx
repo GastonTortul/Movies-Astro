@@ -33,6 +33,7 @@ export const Main = () => {
   const addPage = () => {
     setPage(page + 1);
   };
+  
   const getMovies = async () => {
     try {
       setLoading(true);
@@ -89,7 +90,7 @@ export const Main = () => {
       {loading ? (
         <p>Cargando...</p>
       ) : (
-        <Button onClick={addPage}>Ver MÃ¡s</Button>
+        <Button onClick={addPage}>Ver Más</Button>
       )}
     </div>
   );

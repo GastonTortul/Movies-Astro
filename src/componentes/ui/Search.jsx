@@ -10,5 +10,6 @@ export const Search = ({selectedGender, setSelectedGender, genders}) => {
                 </option>
             })
         }
-    </select>)
+    </select>
+    )
 }
